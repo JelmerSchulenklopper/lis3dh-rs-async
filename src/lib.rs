@@ -9,7 +9,7 @@
 //!
 
 #![no_std]
-#![feature(async_fn_in_trait)]
+// #![feature(async_fn_in_trait)]
 #![allow(incomplete_features)]
 
 use core::convert::{TryFrom, TryInto};
@@ -654,6 +654,28 @@ where
         let status = self.read_register(Register::FIFO_SRC).await?;
 
         Ok(FifoStatus::from_bits(status))
+    }
+
+    /// Enable High Pass Filter with AOI function
+    pub async fn enable_high_pass_filter_with_interrupt<I: Interrupt>(
+        &mut self,
+        _int: I,
+    ) -> Result<(), Error<CORE::BusError>> {
+        self.write_register(Register::CTRL2, FDS | I::hp_ia_bit()).await
+    }
+
+    /// Enable High Pass Filter
+    pub async fn enable_high_pass_filter(
+        &mut self,
+    ) -> Result<(), Error<CORE::BusError>> {
+        self.write_register(Register::CTRL2, FDS).await
+    }
+
+    /// Disable High Pass Filter
+    pub async fn disable_high_pass_filter(
+        &mut self,
+    ) -> Result<(), Error<CORE::BusError>> {
+        self.write_register(Register::CTRL2, 0x00).await
     }
 
     /// Get normalized ±g reading from the accelerometer. You should be reading

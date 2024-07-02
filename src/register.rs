@@ -396,6 +396,12 @@ pub const Z_EN: u8 = 0b0000_0100;
 pub const Y_EN: u8 = 0b0000_0010;
 pub const X_EN: u8 = 0b0000_0001;
 
+// === CTRL_REG2 (21h) ===
+
+pub const FDS: u8 = 0b0000_1000;
+pub const HP_IA2: u8 = 0b0000_0010;
+pub const HP_IA1: u8 = 0b0000_0001;
+
 // === CTRL_REG4 (23h) ===
 
 pub const BDU: u8 = 0b1000_0000;

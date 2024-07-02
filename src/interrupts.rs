@@ -15,6 +15,7 @@ pub trait Interrupt {
     fn duration_reg() -> Register;
     fn lir_int_bit() -> u8;
     fn d4d_int_bit() -> u8;
+    fn hp_ia_bit() -> u8;
 }
 
 impl Interrupt for Interrupt1 {
@@ -41,6 +42,10 @@ impl Interrupt for Interrupt1 {
     fn d4d_int_bit() -> u8 {
         2
     }
+
+    fn hp_ia_bit() -> u8 {
+        0
+    }
 }
 
 impl Interrupt for Interrupt2 {
@@ -66,6 +71,10 @@ impl Interrupt for Interrupt2 {
 
     fn d4d_int_bit() -> u8 {
         0
+    }
+
+    fn hp_ia_bit() -> u8 {
+        1
     }
 }
 
